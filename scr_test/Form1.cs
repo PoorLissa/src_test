@@ -5,6 +5,8 @@ using System.Windows.Forms;
 
 // https://sites.harding.edu/fmccown/screensaver/screensaver.html
 
+// What graphisc api to choose for C#
+// https://www.reddit.com/r/csharp/comments/5uvyw9/what_can_i_use_for_basic_fast_2d_graphics/
 
 namespace scr_test
 {
