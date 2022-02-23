@@ -34,6 +34,8 @@ public class star
 
         size = (dx * dx + dy * dy) / 50;
 
+        size = rand.Next(11) + 1;
+
         do
         {
             if (size > 6)

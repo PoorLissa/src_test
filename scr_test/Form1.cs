@@ -76,7 +76,7 @@ namespace scr_test
             {
                 var list = new System.Collections.Generic.List<star>();
 
-                for (int i = 0; i < 1500; i++)
+                for (int i = 0; i < 500; i++)
                 {
                     list.Add(new star(this.Width, this.Height));
                 }
