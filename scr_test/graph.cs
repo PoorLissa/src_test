@@ -15,6 +15,8 @@ public class star
     private int MaxX;
     private int MaxY;
 
+    public Brush brush = null;
+
     public star(int maxX, int maxY)
     {
         var rand = new Random();
@@ -30,7 +32,30 @@ public class star
         dx = (rand.Next(speed) + 1) * (rand.Next(2) == 0 ? 1 : -1);
         dy = (rand.Next(speed) + 1) * (rand.Next(2) == 0 ? 1 : -1);
 
-        size = rand.Next(10) + 1;
+        size = (dx * dx + dy * dy) / 50;
+
+        do
+        {
+            if (size > 6)
+            {
+                brush = Brushes.DarkGreen;
+                break;
+            }
+
+            if (size > 3)
+            {
+                brush = Brushes.Green;
+                break;
+            }
+
+            if (size >= 0)
+            {
+                brush = Brushes.LightGreen;
+                break;
+            }
+        }
+        while (false);
+
     }
 
     public void move()

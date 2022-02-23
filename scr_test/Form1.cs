@@ -51,7 +51,7 @@ namespace scr_test
 
                     foreach (var s in list)
                     {
-                        g.FillRectangle(Brushes.Red, s.X, s.Y, s.size, s.size);
+                        g.FillRectangle(s.brush, s.X, s.Y, s.size, s.size);
                         s.move();
                     }
 
@@ -87,7 +87,7 @@ namespace scr_test
 
                     foreach (var s in list)
                     {
-                        g.FillRectangle(Brushes.Green, s.X, s.Y, s.size, s.size);
+                        g.FillRectangle(s.brush, s.X, s.Y, s.size, s.size);
                         s.move();
                     }
 
