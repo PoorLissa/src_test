@@ -14,7 +14,6 @@ namespace scr_test
     {
         private bool isAlive = false;
         private Point oldMouseLocation;
-        Graphics g = null;
 
         // -------------------------------------------------------------------
 
@@ -27,78 +26,25 @@ namespace scr_test
             this.FormBorderStyle = FormBorderStyle.None;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Bounds = bounds;
-            this.TopMost = true;
+            //this.TopMost = true;
             this.DoubleBuffered = true;
 
-            zzz2();
+            my.myObject.Height = this.Height;
+            my.myObject.Width  = this.Width;
+
+            RunScreensaver();
         }
 
-        private void zzz1()
+        // -------------------------------------------------------------------
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            g = this.CreateGraphics();
-            isAlive = true;
-
-            new System.Threading.Tasks.Task(() =>
-            {
-                var list = new System.Collections.Generic.List<star>();
-
-                for (int i = 0; i < 500; i++)
-                {
-                    list.Add(new star(this.Width, this.Height));
-                }
-
-                while (isAlive)
-                {
-                    g.FillRectangle(Brushes.Black, 0, 0, this.Width, this.Height);
-
-                    foreach (var s in list)
-                    {
-                        g.FillRectangle(s.brush, s.X, s.Y, s.size, s.size);
-                        s.move();
-                    }
-
-                    System.Threading.Thread.Sleep(10);
-                }
-
-                g.Dispose();
-
-            }).Start();
+            isAlive = false;
+            while (isAlive == false);
+            Application.Exit();
         }
 
-        // Using form's background image as our drawing surface
-        private void zzz2()
-        {
-            Bitmap buffer = new Bitmap(this.Width, this.Height);    // set the size of the image
-            g = Graphics.FromImage(buffer);                         // set the graphics to draw on the image
-
-            isAlive = true;
-            this.BackgroundImage = buffer;                          // set the PictureBox's image to be the buffer
-
-            new System.Threading.Tasks.Task(() =>
-            {
-                var list = new System.Collections.Generic.List<star>();
-
-                for (int i = 0; i < 500; i++)
-                {
-                    list.Add(new star(this.Width, this.Height));
-                }
-
-                while (isAlive)
-                {
-                    g.FillRectangle(Brushes.Black, 0, 0, this.Width, this.Height);
-
-                    foreach (var s in list)
-                    {
-                        g.FillRectangle(s.brush, s.X, s.Y, s.size, s.size);
-                        s.move();
-                    }
-
-                    this.Invalidate();
-                    System.Threading.Thread.Sleep(33);
-                }
-
-            }).Start();
-        }
+        // -------------------------------------------------------------------
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -110,7 +56,7 @@ namespace scr_test
                 if (Math.Abs(oldMouseLocation.X - e.X) > dist || Math.Abs(oldMouseLocation.Y - e.Y) > dist)
                 {
                     isAlive = false;
-                    g.Dispose();
+                    while (isAlive == false);
                     Application.Exit();
                 }
             }
@@ -118,5 +64,43 @@ namespace scr_test
             // Update mouse location
             oldMouseLocation = e.Location;
         }
+
+        // -------------------------------------------------------------------
+
+        private void RunScreensaver()
+        {
+            int id = 0;
+
+            isAlive = true;
+
+            my.myObject.Count = 333;
+
+            new System.Threading.Tasks.Task(() => {
+
+                switch (id)
+                {
+                    case 0:
+                        my.myObj_000.Process(this, ref isAlive);
+                        break;
+
+                    case 1:
+                        my.myObj_001.Process(this, ref isAlive);
+                        break;
+
+                    case 2:
+                        my.myObj_002.Process(this, ref isAlive);
+                        break;
+
+                    default:
+                        my.myObj_000.Process(this, ref isAlive);
+                        break;
+                }
+
+            }).Start();
+
+            return;
+        }
+
+        // -------------------------------------------------------------------
     }
 }

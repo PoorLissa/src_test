@@ -1,81 +1,8 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;   // For dll import
 
-public class star
-{
-    public int size;
-    public int X;
-    public int Y;
 
-    private int dx;
-    private int dy;
-
-    private int MaxX;
-    private int MaxY;
-
-    public Brush brush = null;
-
-    public star(int maxX, int maxY)
-    {
-        var rand = new Random();
-
-        MaxX = maxX;
-        MaxY = maxY;
-
-        X = rand.Next(maxX);
-        Y = rand.Next(maxY);
-
-        int speed = 20;
-
-        dx = (rand.Next(speed) + 1) * (rand.Next(2) == 0 ? 1 : -1);
-        dy = (rand.Next(speed) + 1) * (rand.Next(2) == 0 ? 1 : -1);
-
-        size = (dx * dx + dy * dy) / 50;
-
-        size = rand.Next(11) + 1;
-
-        do
-        {
-            if (size > 6)
-            {
-                brush = Brushes.DarkGreen;
-                break;
-            }
-
-            if (size > 3)
-            {
-                brush = Brushes.Green;
-                break;
-            }
-
-            if (size >= 0)
-            {
-                brush = Brushes.LightGreen;
-                break;
-            }
-        }
-        while (false);
-
-    }
-
-    public void move()
-    {
-        X += dx;
-        Y += dy;
-
-        if (X < 0 || X > MaxX)
-        {
-            dx *= -1;
-        }
-
-        if (Y < 0 || Y > MaxY)
-        {
-            dy *= -1;
-        }
-    }
-};
 
 public class myGraphics
 {
