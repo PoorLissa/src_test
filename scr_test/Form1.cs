@@ -21,7 +21,7 @@ namespace scr_test
         {
             InitializeComponent();
 
-            //Cursor.Hide();
+            Cursor.Hide();
 
             this.FormBorderStyle = FormBorderStyle.None;
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -39,9 +39,7 @@ namespace scr_test
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            isAlive = false;
-            while (isAlive == false);
-            Application.Exit();
+            appExit();
         }
 
         // -------------------------------------------------------------------
@@ -55,9 +53,7 @@ namespace scr_test
                 // Terminate if mouse is moved a significant distance
                 if (Math.Abs(oldMouseLocation.X - e.X) > dist || Math.Abs(oldMouseLocation.Y - e.Y) > dist)
                 {
-                    isAlive = false;
-                    while (isAlive == false);
-                    Application.Exit();
+                    appExit();
                 }
             }
 
@@ -91,6 +87,10 @@ namespace scr_test
                         my.myObj_002.Process(this, ref isAlive);
                         break;
 
+                    case 100:
+                        my.myObj_100.Process(this, ref isAlive);
+                        break;
+
                     default:
                         my.myObj_000.Process(this, ref isAlive);
                         break;
@@ -99,6 +99,18 @@ namespace scr_test
             }).Start();
 
             return;
+        }
+
+        // -------------------------------------------------------------------
+
+        private void appExit()
+        {
+            isAlive = false;
+
+            while (isAlive == false)
+                ;
+
+            Application.Exit();
         }
 
         // -------------------------------------------------------------------
